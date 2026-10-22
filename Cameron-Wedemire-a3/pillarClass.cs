@@ -11,15 +11,36 @@ public class Pillar
     public float centerX;
     public float centerY;
     public float speed;
+    public float newPillarY;
+    public int hasToLoop = 1;
 
-    public void Setup()
+    public void Setup(int offset, float lastPillarY)
     {
-        this.centerX = 700; //fix this so it spawns off screen to the right by the minimum
-        this.centerY = Random.Float(85, 315);
-        this.speed = 1; //change this later to fit the game better if needed
+        this.centerX = 40 + offset; //fix this so it spawns off screen to the right by the minimum
+        this.speed = -1; //change this later to fit the game better if needed
+
+        //chose the random Y position of the pillar
+        if (offset == 50)
+        {
+            this.centerY = 200; //first pillar is always in the middle of the screen to support the player on spawn
+        }
+        else
+        {
+            //retry to find a value when the difference is too great to jump between them, this avoids impossible jumps that would break the game
+            while (hasToLoop == 1)//change the 100 here and lower to a better number once you get the jump figured out
+            {
+                newPillarY = Random.Float(85, 315);
+
+                if ((Math.Abs(newPillarY - lastPillarY) < 100) && (Math.Abs(newPillarY - lastPillarY) > 25))
+                {
+                    hasToLoop = 0;
+                }
+            }
+            this.centerY = newPillarY;
+        }
     }
 
-    public void Update()
+    public void Update(float lastPillarY)
     {
         this.centerX += this.speed;
 
@@ -27,12 +48,23 @@ public class Pillar
         if (this.centerX < -50)
         {
             this.centerX = 700;//fix this so it spawns off screen to the right by same amount as spawn
-            this.centerY = Random.Float(85, 315); //will need a way to change this but keep it possible to jump from last pillar
+
+            //retry to find a value when the difference is too great to jump between them, this avoids impossible jumps that would break the game
+            while (hasToLoop == 1)//change the 100 here and lower to a better number once you get the jump figured out
+            {
+                newPillarY = Random.Float(85, 315);
+
+                if ((Math.Abs(newPillarY - lastPillarY) < 100) && (Math.Abs(newPillarY - lastPillarY) > 25))
+                {
+                    hasToLoop = 0;
+                }
+            }
+            this.centerY = newPillarY;
         }
 
-        Draw.FillColor = (194, 197, 204);
-        Draw.LineColor = (0, 0, 0;)
-        Draw.Rectangle(this.centerX, this.centerY, 30, 15);
+        Draw.SetFillColor(194, 197, 204);
+        Draw.SetLineColor(0, 0, 0);
+        Draw.Rectangle(this.centerX -40, this.centerY - 7.5f, 80, 15);
     }
 
 }

@@ -14,11 +14,13 @@ namespace MohawkGame2D
         float playerX = 50;
         float playerY = 200;
 
+        float lastPillarY = 200;
+        Pillar[] Pillars = new Pillar[5];//array of pillars
+
         //the tunnels with be random range placed on the y axis within _ distance in a way that allows the player to not be blocked by a impassable wall
         //the tunnels will have their x value go from right to left at a reasonable speed,
         //if the player hits the wall of a tunnel it will reset the game, 
-        float tunnel1CenterX = -50;
-        float tunnel1CenterY = -50;
+        //note this was moved into the pillar class
 
         /// <summary>
         ///     Setup runs once before the game loop begins.
@@ -27,6 +29,15 @@ namespace MohawkGame2D
         {
             Window.SetTitle("Pillar Run");
             Window.SetSize(600, 400);
+
+            //iterate over array, to setup each pillar
+            for (int i = 0; i < Pillars.Length; i++)
+            {
+                //for each element in arrey, create new pillar
+                Pillars[i] = new Pillar();
+                //setup the pillar that was just made
+                Pillars[i].Setup(50+ (i*150), lastPillarY);
+            }
         }
 
         /// <summary>
@@ -35,6 +46,17 @@ namespace MohawkGame2D
         public void Update()
         {
             Window.ClearBackground(25, 25, 25);
+
+            //iterate over array, to update each pillar
+            for (int i = 0; i < Pillars.Length; i++)
+            {
+                //update each pillar
+                Pillars[i].Update(lastPillarY);
+
+                lastPillarY = Pillars[i].centerY;
+
+                //Console.WriteLine(lastPillarY);
+            }
         }
     }
 
