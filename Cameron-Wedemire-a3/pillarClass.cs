@@ -13,11 +13,13 @@ public class Pillar
     public float speed;
     public float newPillarY;
     public int hasToLoop = 1;
+    Color tempColor;
 
     public void Setup(int offset, float lastPillarY)
     {
         this.centerX = 40 + offset; //fix this so it spawns off screen to the right by the minimum
         this.speed = -1; //change this later to fit the game better if needed
+        this.tempColor = Random.Color(); //this is for testing loop purposes
 
         //chose the random Y position of the pillar
         if (offset == 50)
@@ -31,7 +33,7 @@ public class Pillar
             {
                 newPillarY = Random.Float(85, 315);
 
-                if ((Math.Abs(newPillarY - lastPillarY) < 100) && (Math.Abs(newPillarY - lastPillarY) > 25))
+                if ((Math.Abs(newPillarY - lastPillarY) < 75) && (Math.Abs(lastPillarY - newPillarY) < 50) //the min is not working
                 {
                     hasToLoop = 0;
                 }
@@ -54,7 +56,7 @@ public class Pillar
             {
                 newPillarY = Random.Float(85, 315);
 
-                if ((Math.Abs(newPillarY - lastPillarY) < 100) && (Math.Abs(newPillarY - lastPillarY) > 25))
+                if ((Math.Abs(newPillarY - lastPillarY) < 75) && (Math.Abs(lastPillarY - newPillarY) < 50))
                 {
                     hasToLoop = 0;
                 }
@@ -62,7 +64,8 @@ public class Pillar
             this.centerY = newPillarY;
         }
 
-        Draw.SetFillColor(194, 197, 204);
+        //Draw.SetFillColor(194, 197, 204); //this will be the real one maybe
+        Draw.SetFillColor(tempColor);
         Draw.SetLineColor(0, 0, 0);
         Draw.Rectangle(this.centerX -40, this.centerY - 7.5f, 80, 15);
     }

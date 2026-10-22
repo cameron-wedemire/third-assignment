@@ -51,11 +51,20 @@ namespace MohawkGame2D
             for (int i = 0; i < Pillars.Length; i++)
             {
                 //update each pillar
-                Pillars[i].Update(lastPillarY);
+                //Pillars[i].Update(lastPillarY);
 
-                lastPillarY = Pillars[i].centerY;
+                //lastPillarY = Pillars[i].centerY;
 
                 //Console.WriteLine(lastPillarY);
+
+                if (i == 0)
+                {
+                    Pillars[i].Update(Pillars[Pillars.Length - 1].centerY);
+                }
+                else
+                {
+                    Pillars[i].Update(Pillars[i].centerY);
+                }
             }
         }
     }
