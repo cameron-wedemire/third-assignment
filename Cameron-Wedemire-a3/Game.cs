@@ -25,7 +25,7 @@ namespace MohawkGame2D
         /// </summary>
         public void Setup()
         {
-            Window.SetTitle("Tunnel Runner");
+            Window.SetTitle("Pillar Run");
             Window.SetSize(600, 400);
         }
 
