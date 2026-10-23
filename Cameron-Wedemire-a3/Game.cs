@@ -11,9 +11,7 @@ namespace MohawkGame2D
     public class Game
     {
         //variables
-        float playerX = 50;
-        float playerY = 200;
-
+        Player character = new Player();
         float lastPillarY = 200;
         Pillar[] Pillars = new Pillar[5];//array of pillars
 
@@ -38,6 +36,8 @@ namespace MohawkGame2D
                 //setup the pillar that was just made
                 Pillars[i].Setup(50+ (i*150), lastPillarY);
             }
+
+            character.Setup();
         }
 
         /// <summary>
@@ -47,16 +47,10 @@ namespace MohawkGame2D
         {
             Window.ClearBackground(25, 25, 25);
 
-            //iterate over array, to update each pillar
+            //iterate over array, to update each pillars position
             for (int i = 0; i < Pillars.Length; i++)
             {
                 //update each pillar
-                //Pillars[i].Update(lastPillarY);
-
-                //lastPillarY = Pillars[i].centerY;
-
-                //Console.WriteLine(lastPillarY);
-
                 if (i == 0)
                 {
                     Pillars[i].Update(Pillars[Pillars.Length - 1].centerY);
@@ -66,6 +60,9 @@ namespace MohawkGame2D
                     Pillars[i].Update(Pillars[i].centerY);
                 }
             }
+            //Console.WriteLine();
+            //update player position
+            character.Update();
         }
     }
 
