@@ -64,10 +64,16 @@ public class Pillar
             this.centerY = newPillarY;
         }
 
-        //Draw.SetFillColor(194, 197, 204); //this will be the real one maybe
+        //draws the pillar
+        Draw.SetFillColor(194, 197, 204);
+        Draw.SetLineColor(0, 0, 0);
+        Draw.Rectangle(this.centerX - 30, this.centerY-340, 60, 300);
+        Draw.Rectangle(this.centerX - 30, this.centerY +40, 60, 300);
+
+        //draws a box for hitbox where player can jump, this is temp
         Draw.SetFillColor(tempColor);
         Draw.SetLineColor(0, 0, 0);
-        Draw.Rectangle(this.centerX -40, this.centerY - 7.5f, 80, 15);
+        Draw.Rectangle(this.centerX -30, this.centerY + 35, 63, 15);
     }
 
 }
