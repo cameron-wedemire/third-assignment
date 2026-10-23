@@ -26,8 +26,8 @@ public class Player
 
         //Draw.SetFillColor(194, 197, 204); //this will be the real one maybe
         //will change the colors later
-        Draw.SetFillColor("red"); 
-        Draw.SetLineColor("cyan");
+        Draw.SetFillColor(255,0,0);
+        Draw.SetLineColor(75,0,75);
         //will change the shape later
         Draw.Circle(this.centerX - 3, this.centerY - 3, 6);
     }
