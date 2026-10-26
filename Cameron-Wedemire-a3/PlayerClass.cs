@@ -16,20 +16,34 @@ public class Player
     {
         this.centerX = 40;
         this.centerY = 200;
+        //this is mainly used for gravity calculation application to the player so -speed is going towards the bottom of the screen
         this.ySpeed = 0;
     }
 
-    public void Update()
+    public void Update(int playerOnGround)
     {
-        this.centerY += this.ySpeed;
+        //player Y movement
+        if (playerOnGround == 0)
+        {
+            this.ySpeed -= 0.1f;
+        }
+
+        this.centerY -= this.ySpeed;
+
         //need to add a thing that when hitting a pillar will move on the x axis along with the pillar
 
-        //Draw.SetFillColor(194, 197, 204); //this will be the real one maybe
+
         //will change the colors later
-        Draw.SetFillColor(255,0,0);
-        Draw.SetLineColor(75,0,75);
-        //will change the shape later
-        Draw.Circle(this.centerX - 3, this.centerY - 3, 6);
+        Draw.SetFillColor(210, 130, 140); //was 194, 197, 204
+        Draw.SetLineColor(75,0,0);
+
+        //draw the player
+        Draw.SetLineSize(1);
+        Draw.Circle(this.centerX - 3, this.centerY - 13, 5);
+        Draw.SetLineSize(3);
+        Draw.Line(this.centerX - 3, this.centerY - 15, this.centerX, this.centerY - 15);
+        Draw.SetLineSize(1);
+        Draw.Circle(this.centerX - 3, this.centerY - 3, 8);
     }
 
 }

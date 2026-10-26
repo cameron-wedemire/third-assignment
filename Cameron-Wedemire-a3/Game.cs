@@ -59,10 +59,15 @@ namespace MohawkGame2D
                 {
                     Pillars[i].Update(Pillars[i].centerY);
                 }
+                //checks if the player hits each pillar
+                if (character.centerY == Pillars[i].centerY)
+                {
+                    
+                }
             }
             //Console.WriteLine();
             //update player position
-            character.Update();
+            character.Update(0);
         }
     }
 
