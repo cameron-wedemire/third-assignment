@@ -16,6 +16,7 @@ namespace MohawkGame2D
         Pillar[] Pillars = new Pillar[5];//array of pillars
         int playerInPillarHitbox;
         int pillarPlayerIsOn;
+        int respawnPillar;
 
         //the tunnels with be random range placed on the y axis within _ distance in a way that allows the player to not be blocked by a impassable wall
         //the tunnels will have their x value go from right to left at a reasonable speed,
@@ -42,6 +43,7 @@ namespace MohawkGame2D
             character.Setup();
             playerInPillarHitbox = 0;
             pillarPlayerIsOn = 0;
+            respawnPillar = 0;
         }
 
         /// <summary>
@@ -65,32 +67,49 @@ namespace MohawkGame2D
                 {
                     Pillars[i].Update(Pillars[i].centerY);
                 }
+
+                //desides if the pillar is the respawnPillar for if the player falls off the map
+                if (Pillars[i].centerX - 30 == 70)
+                {
+                    respawnPillar = i;
+                }
+
                 //checks if the player hits each pillar (first if statement checkss if the x value contains the players x value)
-                if ((Pillars[i].centerX - 30 < character.centerX) && (Pillars[i].centerX + 40 > character.centerX)) //this.centerX -30, this.centerY + 35
+                if ((Pillars[i].centerX - 30 < character.centerX) && (Pillars[i].centerX + 40 > character.centerX))
                 {
                     //Console.WriteLine(i);
                     //Console.WriteLine(Pillars[i].centerX);
                     //Console.WriteLine("");
                     pillarPlayerIsOn = i;
 
-                    //check if the y value contains the player
-                    if (character.centerY - 3 >= Pillars[i].centerY + 31) //this.centerX -30, this.centerY + 35
+                    //check if the y value contains the player (JUMP HITBOX)
+                    if (character.centerY - 3 >= Pillars[i].centerY + 31)
                     {
-                        if (character.centerY - 3 <= Pillars[i].centerY + 40) //this.centerX -30, this.centerY + 35
+                        if (character.centerY - 3 <= Pillars[i].centerY + 40)
                         {
                             playerInPillarHitbox = 1;
                         }
+                    }
+
+                    //check if the y value contains the player (WALL HITBOX)
+                    if (character.centerY - 3 <= Pillars[i].centerY -40)
+                    {
+                        character.centerX -= 1;
+                    }
+                    else if (character.centerY - 3 >= Pillars[i].centerY + 40)
+                    {
+                        character.centerX -= 1;
                     }
                 }
             }
             //Console.WriteLine();
             //update player position
-            //if player goes below bottom of the screen it will respawn when the next pillar goes past
-            if ((character.centerY > 420) && (Pillars[pillarPlayerIsOn].centerX == 50))
+            //if player goes below bottom of the screen it or off the left of the screen it will respawn on the respawnPillar (pillar at x=50)
+            if (((character.centerY > 420) || (character.centerX < -5)) && (Pillars[respawnPillar].centerX == 70))
             {
                 character.ySpeed = -2;
                 character.centerX = 50;
-                character.centerY = Pillars[pillarPlayerIsOn].centerY+20;
+                character.centerY = Pillars[respawnPillar].centerY+20;
             }
 
             character.Update(playerInPillarHitbox, Pillars[pillarPlayerIsOn].centerY);
