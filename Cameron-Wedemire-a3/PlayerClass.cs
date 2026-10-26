@@ -47,7 +47,6 @@ public class Player
             }
             else if (this.jumpWindup != 0)
             {
-                Console.WriteLine(this.jumpWindup);
                 this.ySpeed = this.jumpWindup;
                 this.centerY = yOfPillarPlayerHit + 30;
             }

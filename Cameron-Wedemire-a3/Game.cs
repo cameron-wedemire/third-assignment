@@ -17,6 +17,7 @@ namespace MohawkGame2D
         int playerInPillarHitbox;
         int pillarPlayerIsOn;
         int respawnPillar;
+        int scoreValue;
 
         //the tunnels with be random range placed on the y axis within _ distance in a way that allows the player to not be blocked by a impassable wall
         //the tunnels will have their x value go from right to left at a reasonable speed,
@@ -44,6 +45,7 @@ namespace MohawkGame2D
             playerInPillarHitbox = 0;
             pillarPlayerIsOn = 0;
             respawnPillar = 0;
+            scoreValue = 0;
         }
 
         /// <summary>
@@ -72,6 +74,7 @@ namespace MohawkGame2D
                 if (Pillars[i].centerX - 30 == 70)
                 {
                     respawnPillar = i;
+                    scoreValue += 1;
                 }
 
                 //checks if the player hits each pillar (first if statement checkss if the x value contains the players x value)
@@ -110,10 +113,18 @@ namespace MohawkGame2D
                 character.ySpeed = -2;
                 character.centerX = 50;
                 character.centerY = Pillars[respawnPillar].centerY+20;
+                scoreValue = 0;
             }
 
             character.Update(playerInPillarHitbox, Pillars[pillarPlayerIsOn].centerY);
+
+            //show the players score
+            Draw.SetFillColor(210, 130, 140); //was 194, 197, 204
+            Draw.SetLineColor(75, 0, 0);
+            Draw.Rectangle(250, 40, 100, 40);
+            Text.Draw($"{scoreValue}", 250, 50);//i asked in class and was shown the $"{}" thing
         }
     }
 
 }
+//Text.Draw (for the score)... add background and better graphics for the pillars
