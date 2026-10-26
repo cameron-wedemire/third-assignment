@@ -15,6 +15,7 @@ namespace MohawkGame2D
         float lastPillarY = 200;
         Pillar[] Pillars = new Pillar[5];//array of pillars
         int playerInPillarHitbox = 0;
+        int pillarPlayerIsOn = 0; //will later be used to respawn player at i+1 when it passes player x value
 
         //the tunnels with be random range placed on the y axis within _ distance in a way that allows the player to not be blocked by a impassable wall
         //the tunnels will have their x value go from right to left at a reasonable speed,
@@ -40,6 +41,7 @@ namespace MohawkGame2D
 
             character.Setup();
             playerInPillarHitbox = 0;
+            pillarPlayerIsOn = 0;
         }
 
         /// <summary>
@@ -69,9 +71,10 @@ namespace MohawkGame2D
                     //Console.WriteLine(i);
                     //Console.WriteLine(Pillars[i].centerX);
                     //Console.WriteLine("");
+                    pillarPlayerIsOn = i;
 
                     //check if the y value contains the player
-                    if (character.centerY - 3 >= Pillars[i].centerY + 35) //this.centerX -30, this.centerY + 35
+                    if (character.centerY - 3 >= Pillars[i].centerY + 31) //this.centerX -30, this.centerY + 35
                     {
                         if (character.centerY - 3 <= Pillars[i].centerY + 50) //this.centerX -30, this.centerY + 35
                         {
@@ -82,7 +85,7 @@ namespace MohawkGame2D
             }
             //Console.WriteLine();
             //update player position
-            character.Update(playerInPillarHitbox);
+            character.Update(playerInPillarHitbox, Pillars[pillarPlayerIsOn].centerY);
         }
     }
 
