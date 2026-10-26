@@ -14,6 +14,8 @@ namespace MohawkGame2D
         Player character = new Player();
         float lastPillarY = 200;
         Pillar[] Pillars = new Pillar[5];//array of pillars
+        backgroundStar[] backgroundStars = new backgroundStar[50]; //array of background stars
+
         int playerInPillarHitbox;
         int pillarPlayerIsOn;
         int respawnPillar;
@@ -36,6 +38,15 @@ namespace MohawkGame2D
                 Pillars[i].Setup(50+ (i*150), lastPillarY);
             }
 
+            //itterate over array, to setup each star
+            for (int i = 0; i < backgroundStars.Length; i++)
+            {
+                //for each element in arrey, create new star
+                backgroundStars[i] = new backgroundStar();
+                //setup the star that was just made
+                backgroundStars[i].Setup();
+            }
+
             character.Setup();
             playerInPillarHitbox = 0;
             pillarPlayerIsOn = 0;
@@ -51,6 +62,16 @@ namespace MohawkGame2D
             Window.ClearBackground(25, 25, 25);
             //reset the variable of player being in the hitbox to false so it can cange later if it actually is in the hitbox
             playerInPillarHitbox = 0;
+
+            //draw the background
+            for (int i = 0; i < backgroundStars.Length; i++)
+            {
+                //setup the star that was just made
+                backgroundStars[i].Update();
+            }
+
+
+
 
             //iterate over array, to update each pillars position
             for (int i = 0; i < Pillars.Length; i++)
@@ -120,4 +141,4 @@ namespace MohawkGame2D
 
 }
 
-//to doadd background and better graphics for the pillars, also if you have time try to add a jump bar to show jump strength
+//to do; better graphics for the pillars, also if you have time try to add a jump bar to show jump strength

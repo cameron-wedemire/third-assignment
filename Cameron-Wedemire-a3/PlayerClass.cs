@@ -12,7 +12,7 @@ public class Player
     public float centerX;
     public float centerY;
     public float ySpeed;
-    public float jumpWindup;
+    float jumpWindup;
 
     public void Setup()
     {
