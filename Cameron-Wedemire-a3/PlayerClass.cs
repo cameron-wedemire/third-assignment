@@ -25,10 +25,14 @@ public class Player
         //player Y movement
         if (playerOnGround == 0)
         {
-            this.ySpeed -= 0.1f;
+            this.ySpeed -= 0.05f;//fine tune value later
+            this.centerY -= this.ySpeed;
         }
-
-        this.centerY -= this.ySpeed;
+        else
+        {
+            //reset ySpeed to 0 as its lost its gravity value as it hit ground
+            this.ySpeed = 0;
+        }
 
         //need to add a thing that when hitting a pillar will move on the x axis along with the pillar
 

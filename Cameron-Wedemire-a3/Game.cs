@@ -14,6 +14,7 @@ namespace MohawkGame2D
         Player character = new Player();
         float lastPillarY = 200;
         Pillar[] Pillars = new Pillar[5];//array of pillars
+        int playerInPillarHitbox = 0;
 
         //the tunnels with be random range placed on the y axis within _ distance in a way that allows the player to not be blocked by a impassable wall
         //the tunnels will have their x value go from right to left at a reasonable speed,
@@ -38,6 +39,7 @@ namespace MohawkGame2D
             }
 
             character.Setup();
+            playerInPillarHitbox = 0;
         }
 
         /// <summary>
@@ -46,6 +48,8 @@ namespace MohawkGame2D
         public void Update()
         {
             Window.ClearBackground(25, 25, 25);
+            //reset the variable of player being in the hitbox to false so it can cange later if it actually is in the hitbox
+            playerInPillarHitbox = 0;
 
             //iterate over array, to update each pillars position
             for (int i = 0; i < Pillars.Length; i++)
@@ -59,15 +63,26 @@ namespace MohawkGame2D
                 {
                     Pillars[i].Update(Pillars[i].centerY);
                 }
-                //checks if the player hits each pillar
-                if (character.centerY == Pillars[i].centerY)
+                //checks if the player hits each pillar (first if statement checkss if the x value contains the players x value)
+                if ((Pillars[i].centerX - 30 < character.centerX) && (Pillars[i].centerX + 35 > character.centerX)) //this.centerX -30, this.centerY + 35
                 {
-                    
+                    //Console.WriteLine(i);
+                    //Console.WriteLine(Pillars[i].centerX);
+                    //Console.WriteLine("");
+
+                    //check if the y value contains the player
+                    if (character.centerY - 3 >= Pillars[i].centerY + 35) //this.centerX -30, this.centerY + 35
+                    {
+                        if (character.centerY - 3 <= Pillars[i].centerY + 50) //this.centerX -30, this.centerY + 35
+                        {
+                            playerInPillarHitbox = 1;
+                        }
+                    }
                 }
             }
             //Console.WriteLine();
             //update player position
-            character.Update(0);
+            character.Update(playerInPillarHitbox);
         }
     }
 
