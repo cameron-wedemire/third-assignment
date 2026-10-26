@@ -55,11 +55,9 @@ public class Player
         //need to add a thing that when hitting a pillar will move on the x axis along with the pillar
 
 
-        //will change the colors later
+        //Draw the player
         Draw.SetFillColor(210, 130, 140); //was 194, 197, 204
         Draw.SetLineColor(75,0,0);
-
-        //draw the player
         Draw.SetLineSize(1);
         Draw.Circle(this.centerX - 3, this.centerY - 13, 5);
         Draw.SetLineSize(3);

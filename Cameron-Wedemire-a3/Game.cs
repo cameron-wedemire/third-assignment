@@ -19,11 +19,6 @@ namespace MohawkGame2D
         int respawnPillar;
         int scoreValue;
 
-        //the tunnels with be random range placed on the y axis within _ distance in a way that allows the player to not be blocked by a impassable wall
-        //the tunnels will have their x value go from right to left at a reasonable speed,
-        //if the player hits the wall of a tunnel it will reset the game, 
-        //note this was moved into the pillar class
-
         /// <summary>
         ///     Setup runs once before the game loop begins.
         /// </summary>
@@ -80,9 +75,6 @@ namespace MohawkGame2D
                 //checks if the player hits each pillar (first if statement checkss if the x value contains the players x value)
                 if ((Pillars[i].centerX - 30 < character.centerX) && (Pillars[i].centerX + 40 > character.centerX))
                 {
-                    //Console.WriteLine(i);
-                    //Console.WriteLine(Pillars[i].centerX);
-                    //Console.WriteLine("");
                     pillarPlayerIsOn = i;
 
                     //check if the y value contains the player (JUMP HITBOX)
@@ -105,7 +97,7 @@ namespace MohawkGame2D
                     }
                 }
             }
-            //Console.WriteLine();
+            //Console.WriteLine(); //remove later
             //update player position
             //if player goes below bottom of the screen it or off the left of the screen it will respawn on the respawnPillar (pillar at x=50)
             if (((character.centerY > 420) || (character.centerX < -5)) && (Pillars[respawnPillar].centerX == 70))
@@ -127,4 +119,5 @@ namespace MohawkGame2D
     }
 
 }
-//Text.Draw (for the score)... add background and better graphics for the pillars
+
+//to doadd background and better graphics for the pillars, also if you have time try to add a jump bar to show jump strength

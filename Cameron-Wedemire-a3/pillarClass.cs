@@ -13,13 +13,11 @@ public class Pillar
     public float speed;
     public float newPillarY;
     public int hasToLoop = 1;
-    Color tempColor;
 
     public void Setup(int offset, float lastPillarY)
     {
-        this.centerX = 40 + offset; //fix this so it spawns off screen to the right by the minimum
-        this.speed = -1; //change this later to fit the game better if needed
-        this.tempColor = Random.Color(); //this is for testing loop purposes
+        this.centerX = 40 + offset;
+        this.speed = -1;
 
         //chose the random Y position of the pillar
         if (offset == 50)
@@ -29,7 +27,7 @@ public class Pillar
         else
         {
             //retry to find a value when the difference is too great to jump between them, this avoids impossible jumps that would break the game
-            while (hasToLoop == 1)//change the 100 here and lower to a better number once you get the jump figured out
+            while (hasToLoop == 1)
             {
                 newPillarY = Random.Float(85, 315);
 
@@ -52,7 +50,7 @@ public class Pillar
             this.centerX = 700;//fix this so it spawns off screen to the right by same amount as spawn
 
             //retry to find a value when the difference is too great to jump between them, this avoids impossible jumps that would break the game
-            while (hasToLoop == 1)//change the 100 here and lower to a better number once you get the jump figured out
+            while (hasToLoop == 1)
             {
                 newPillarY = Random.Float(85, 315);
 
