@@ -77,48 +77,8 @@ namespace MohawkGame2D
             for (int i = 0; i < Pillars.Length; i++)
             {
                 //update each pillar
-                if (i == 0)
-                {
-                    Pillars[i].Update(Pillars[Pillars.Length - 1].centerY);
-                }
-                else
-                {
-                    Pillars[i].Update(Pillars[i].centerY);
-                }
-
-                //desides if the pillar is the respawnPillar for if the player falls off the map
-                if (Pillars[i].centerX - 30 == 70)
-                {
-                    respawnPillar = i;
-                    scoreValue += 1;
-                }
-
-                //checks if the player hits each pillar (first if statement checkss if the x value contains the players x value)
-                if ((Pillars[i].centerX - 30 < character.centerX) && (Pillars[i].centerX + 40 > character.centerX))
-                {
-                    pillarPlayerIsOn = i;
-
-                    //check if the y value contains the player (JUMP HITBOX)
-                    if (character.centerY - 3 >= Pillars[i].centerY + 31)
-                    {
-                        if (character.centerY - 3 <= Pillars[i].centerY + 40)
-                        {
-                            playerInPillarHitbox = 1;
-                        }
-                    }
-
-                    //check if the y value contains the player (WALL HITBOX)
-                    if (character.centerY - 3 <= Pillars[i].centerY -40)
-                    {
-                        character.centerX -= 1;
-                    }
-                    else if (character.centerY - 3 >= Pillars[i].centerY + 40)
-                    {
-                        character.centerX -= 1;
-                    }
-                }
+                pillarMovement(i);
             }
-            //Console.WriteLine(); //remove later
             //update player position
             //if player goes below bottom of the screen it or off the left of the screen it will respawn on the respawnPillar (pillar at x=50)
             if (((character.centerY > 420) || (character.centerX < -5)) && (Pillars[respawnPillar].centerX == 70))
@@ -137,6 +97,48 @@ namespace MohawkGame2D
             Draw.Rectangle(250, 40, 100, 40);
             Text.Draw($"{scoreValue}", 250, 50);//i asked in class and was shown the $"{}" thing
         }
-    }
+        public void pillarMovement(int i)
+        {
+            if (i == 0)
+            {
+                Pillars[i].Update(Pillars[Pillars.Length - 1].centerY);
+            }
+            else
+            {
+                Pillars[i].Update(Pillars[i].centerY);
+            }
 
+            //desides if the pillar is the respawnPillar for if the player falls off the map
+            if (Pillars[i].centerX - 30 == 70)
+            {
+                respawnPillar = i;
+                scoreValue += 1;
+            }
+
+            //checks if the player hits each pillar (first if statement checkss if the x value contains the players x value)
+            if ((Pillars[i].centerX - 30 < character.centerX) && (Pillars[i].centerX + 40 > character.centerX))
+            {
+                pillarPlayerIsOn = i;
+
+                //check if the y value contains the player (JUMP HITBOX)
+                if (character.centerY - 3 >= Pillars[i].centerY + 31)
+                {
+                    if (character.centerY - 3 <= Pillars[i].centerY + 40)
+                    {
+                        playerInPillarHitbox = 1;
+                    }
+                }
+
+                //check if the y value contains the player (WALL HITBOX)
+                if (character.centerY - 3 <= Pillars[i].centerY - 40)
+                {
+                    character.centerX -= 1;
+                }
+                else if (character.centerY - 3 >= Pillars[i].centerY + 40)
+                {
+                    character.centerX -= 1;
+                }
+            }
+        }
+    }
 }
