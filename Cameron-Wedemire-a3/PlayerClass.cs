@@ -44,6 +44,12 @@ public class Player
                 {
                     this.jumpWindup = 3.5f;
                 }
+                //Draw power bar to show player what the wind up power is at
+                Draw.SetFillColor(194, 197, 204);
+                Draw.SetLineColor(75, 0, 0);
+                Draw.Rectangle(this.centerX - 23, this.centerY - 20, 10, 25);
+                Draw.SetFillColor(250, 0, 0);
+                Draw.Rectangle(this.centerX - 23, this.centerY - (20 + this.jumpWindup), 10, this.jumpWindup * 8);
             }
             else if (this.jumpWindup != 0)
             {
@@ -52,11 +58,8 @@ public class Player
             }
         }
 
-        //need to add a thing that when hitting a pillar will move on the x axis along with the pillar
-
-
         //Draw the player
-        Draw.SetFillColor(210, 130, 140); //was 194, 197, 204
+        Draw.SetFillColor(210, 130, 140);
         Draw.SetLineColor(75,0,0);
         Draw.SetLineSize(1);
         Draw.Circle(this.centerX - 3, this.centerY - 13, 5);

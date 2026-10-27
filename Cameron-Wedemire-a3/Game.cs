@@ -140,5 +140,3 @@ namespace MohawkGame2D
     }
 
 }
-
-//to do; better graphics for the pillars, also if you have time try to add a jump bar to show jump strength
