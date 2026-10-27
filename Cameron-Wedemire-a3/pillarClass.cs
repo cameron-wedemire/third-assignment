@@ -63,17 +63,22 @@ public class Pillar
         }
 
         //draws the pillar basic shape (this is what the hitbox is based on)
-        Draw.SetFillColor(194, 197, 204);
+        Draw.SetFillColor(194, 197, 190);
         Draw.SetLineColor(0, 0, 0);
         Draw.Rectangle(this.centerX - 30, this.centerY-340, 60, 300);
         Draw.Rectangle(this.centerX - 30, this.centerY +40, 60, 300);
 
-        //draws the pillars details
-        Draw.SetFillColor(190,50,100);
-        Draw.Rectangle(this.centerX - 25, this.centerY+40, 50, 10);
-        Draw.Rectangle(this.centerX - 5, this.centerY + 50, 10, 50);
-        Draw.Circle(this.centerX, this.centerY+75, 15);
-        Draw.Rectangle(this.centerX - 25, this.centerY + 95, 50, 10);
+        //draws the bottom pillars details
+        Draw.SetFillColor(190,90,170);
+        Draw.Rectangle(this.centerX - 25, this.centerY + 40, 50, 10);
+        Draw.Circle(this.centerX, this.centerY + 75, 12);
+        Draw.Circle(this.centerX, this.centerY + 115, 7);
+
+        //draws the top pillars details
+        Draw.SetFillColor(190, 90, 170);
+        Draw.Rectangle(this.centerX - 25, this.centerY - 50, 50, 10);
+        Draw.Circle(this.centerX, this.centerY - 85, 12);
+        Draw.Circle(this.centerX, this.centerY - 125, 7);
     }
 
 }
