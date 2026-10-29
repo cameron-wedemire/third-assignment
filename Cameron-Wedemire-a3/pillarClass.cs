@@ -71,7 +71,7 @@ public class Pillar
         //min it so it cant go off screen top
         if ((lastPillarY - 50) < 85)
         {
-            minPillarHeight = 300;
+            minPillarHeight = 110;
         }
         else
         {
@@ -80,7 +80,7 @@ public class Pillar
         //max it so it cant go off screen bottom
         if ((lastPillarY + 50) > 315)
         {
-            maxPillarHeight = 100;
+            maxPillarHeight = 290;
         }
         else
         {
