@@ -13,7 +13,6 @@ public class Pillar
     public float centerY;
     public float speed;
     float newPillarY;
-    int hasToLoop;
 
     float minPillarHeight;
     float maxPillarHeight;
@@ -32,18 +31,8 @@ public class Pillar
         }
         else
         {
-            //retry to find a value when the difference is too great to jump between them, this avoids impossible jumps that would break the game
-            hasToLoop = 1;
-            while (hasToLoop == 1)
-            {
-                newPillarY = Random.Float(85, 315);
-
-                if ((Math.Abs(lastPillarY - newPillarY) <= 50) && (Math.Abs(lastPillarY - newPillarY) >= 30)) //the min is not working
-                {
-                    hasToLoop = 0;
-                }
-            }
-            this.centerY = newPillarY;
+            //call the cuntion that chooses a new Y value and resets the pillar
+            pillarReset(offset , lastPillarY);
         }
     }
 
@@ -51,58 +40,12 @@ public class Pillar
     {
         this.centerX += this.speed;
 
-        ////loop screen
-        //if (this.centerX < -50)
-        //{
-        //    hasToLoop = 1;
-        //    //retry to find a value when the difference is too great to jump between them, this avoids impossible jumps that would break the game
-        //    while (hasToLoop == 1)
-        //    {
-        //        newPillarY = Random.Float(85, 315);
-
-        //        if ((Math.Abs(newPillarY - lastPillarY) <= 50) && (Math.Abs(newPillarY - lastPillarY) >= 30))
-        //        {
-        //            hasToLoop = 0;
-        //        }
-        //    }
-        //    Console.WriteLine(Math.Abs(newPillarY - lastPillarY));
-        //    this.centerY = newPillarY;
-        //    this.centerX = 700;
-        //}
-
-        //loop screen m2
+        //
         if (this.centerX < -50)
         {
-            //retry to find a value when the difference is too great to jump between them, this avoids impossible jumps that would break the game
-            //min it so it cant go off screen top
-            if ((lastPillarY - 50) < 85)
-            {
-                minPillarHeight = 100;
-            }
-            else
-            {
-                minPillarHeight = lastPillarY - 50;
-            }
-            //max it so it cant go off screen bottom
-            if ((lastPillarY + 50) > 315)
-            {
-                maxPillarHeight = 300;
-            }
-            else
-            {
-                maxPillarHeight = lastPillarY + 50;
-            }
-
-            //loop inside the minMax untill it has enough difference to not be impossible to jump
-            newPillarY = lastPillarY; //temp to make while loop start
-            while (Math.Abs(newPillarY - lastPillarY) <= 30)
-            {
-                newPillarY = Random.Float(minPillarHeight, maxPillarHeight);
-            }
-            this.centerY = newPillarY;
-            this.centerX = 700;
+            //call the cuntion that chooses a new Y value and resets the pillar
+            pillarReset(660, lastPillarY);
         }
-
 
         //draws the pillar basic shape (this is what the hitbox is based on)
         Draw.SetFillColor(194, 197, 190);
@@ -122,5 +65,35 @@ public class Pillar
         Draw.Circle(this.centerX, this.centerY - 85, 12);
         Draw.Circle(this.centerX, this.centerY - 125, 7);
     }
+    public void pillarReset(int offset, float lastPillarY)
+    {
+        //retry to find a value when the difference is too great to jump between them, this avoids impossible jumps that would break the game
+        //min it so it cant go off screen top
+        if ((lastPillarY - 50) < 85)
+        {
+            minPillarHeight = 100;
+        }
+        else
+        {
+            minPillarHeight = lastPillarY - 50;
+        }
+        //max it so it cant go off screen bottom
+        if ((lastPillarY + 50) > 315)
+        {
+            maxPillarHeight = 300;
+        }
+        else
+        {
+            maxPillarHeight = lastPillarY + 50;
+        }
 
+        //loop inside the minMax untill it has enough difference to not be impossible to jump
+        newPillarY = lastPillarY; //temp to make while loop start
+        while (Math.Abs(newPillarY - lastPillarY) <= 30)
+        {
+            newPillarY = Random.Float(minPillarHeight, maxPillarHeight);
+        }
+        this.centerY = newPillarY;
+        this.centerX = 40 + offset;
+    }
 }
