@@ -12,13 +12,13 @@ public class Pillar
     public float centerY;
     public float speed;
     float newPillarY;
-    int hasToLoop = 1;
+    int hasToLoop;
 
     public void Setup(int offset, float lastPillarY)
     {
         this.centerX = 40 + offset;
         this.speed = -1;
-
+        hasToLoop = 1;
         //chose the random Y position of the pillar
         if (offset == 50)
         {
@@ -31,7 +31,7 @@ public class Pillar
             {
                 newPillarY = Random.Float(85, 315);
 
-                if ((Math.Abs(newPillarY - lastPillarY) < 75) && (Math.Abs(lastPillarY - newPillarY) < 50)) //the min is not working
+                if ((Math.Abs(newPillarY - lastPillarY) < 50) && (Math.Abs(lastPillarY - newPillarY) < 25)) //the min is not working
                 {
                     hasToLoop = 0;
                 }
@@ -47,19 +47,19 @@ public class Pillar
         //loop screen
         if (this.centerX < -50)
         {
-            this.centerX = 700;//fix this so it spawns off screen to the right by same amount as spawn
-
+            hasToLoop = 1;
             //retry to find a value when the difference is too great to jump between them, this avoids impossible jumps that would break the game
             while (hasToLoop == 1)
             {
                 newPillarY = Random.Float(85, 315);
 
-                if ((Math.Abs(newPillarY - lastPillarY) < 75) && (Math.Abs(lastPillarY - newPillarY) < 50))
+                if ((Math.Abs(newPillarY - lastPillarY) < 75) && (Math.Abs(lastPillarY - newPillarY) <40))
                 {
                     hasToLoop = 0;
                 }
             }
             this.centerY = newPillarY;
+            this.centerX = 700;//fix this so it spawns off screen to the right by same amount as spawn
         }
 
         //draws the pillar basic shape (this is what the hitbox is based on)
