@@ -31,7 +31,7 @@ public class Pillar
             {
                 newPillarY = Random.Float(85, 315);
 
-                if ((Math.Abs(newPillarY - lastPillarY) < 50) && (Math.Abs(lastPillarY - newPillarY) < 25)) //the min is not working
+                if ((Math.Abs(newPillarY - lastPillarY) < 75) && (Math.Abs(lastPillarY - newPillarY) < 50)) //the min is not working
                 {
                     hasToLoop = 0;
                 }
@@ -53,7 +53,7 @@ public class Pillar
             {
                 newPillarY = Random.Float(85, 315);
 
-                if ((Math.Abs(newPillarY - lastPillarY) < 75) && (Math.Abs(lastPillarY - newPillarY) <40))
+                if ((Math.Abs(newPillarY - lastPillarY) < 75) && (Math.Abs(lastPillarY - newPillarY) < 50))
                 {
                     hasToLoop = 0;
                 }
