@@ -112,7 +112,10 @@ namespace MohawkGame2D
             if (Pillars[i].centerX - 30 == 70)
             {
                 respawnPillar = i;
-                scoreValue += 1;
+                if (character.centerY < 420)
+                {
+                    scoreValue += 1;
+                }
             }
 
             //checks if the player hits each pillar (first if statement checkss if the x value contains the players x value)

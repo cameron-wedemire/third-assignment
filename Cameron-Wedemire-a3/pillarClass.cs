@@ -18,7 +18,6 @@ public class Pillar
     {
         this.centerX = 40 + offset;
         this.speed = -1;
-        hasToLoop = 1;
         //chose the random Y position of the pillar
         if (offset == 50)
         {
@@ -27,11 +26,12 @@ public class Pillar
         else
         {
             //retry to find a value when the difference is too great to jump between them, this avoids impossible jumps that would break the game
+            hasToLoop = 1;
             while (hasToLoop == 1)
             {
                 newPillarY = Random.Float(85, 315);
 
-                if ((Math.Abs(newPillarY - lastPillarY) < 75) && (Math.Abs(lastPillarY - newPillarY) < 50)) //the min is not working
+                if ((Math.Abs(newPillarY - lastPillarY) <= 60) && (Math.Abs(newPillarY - lastPillarY) >= 30)) //the min is not working
                 {
                     hasToLoop = 0;
                 }
@@ -53,7 +53,7 @@ public class Pillar
             {
                 newPillarY = Random.Float(85, 315);
 
-                if ((Math.Abs(newPillarY - lastPillarY) < 75) && (Math.Abs(lastPillarY - newPillarY) < 50))
+                if ((Math.Abs(newPillarY - lastPillarY) <= 60) && (Math.Abs(newPillarY - lastPillarY) >= 30))
                 {
                     hasToLoop = 0;
                 }
