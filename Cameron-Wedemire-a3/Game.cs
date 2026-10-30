@@ -101,7 +101,7 @@ namespace MohawkGame2D
         {
             if (i == 0)
             {
-                Pillars[i].Update(Pillars[Pillars.Length - 1].centerY);
+                Pillars[i].Update(Pillars[Pillars.Length-1].centerY);
             }
             else
             {
